@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GhostTrail: Cursed Choices</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+    #choices button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #textInput {
+      margin-top: 20px;
+      font-size: 16px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="game"></div>
+<div id="choices"></div>
+<input type="text" id="textInput" style="display:none;" placeholder="Type A, B, C, or D and press Enter">
+
+<script>
+const gameText = document.getElementById('game');
+const choicesDiv = document.getElementById('choices');
+const textInput = document.getElementById('textInput');
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function printFast(text) {
+  gameText.innerHTML += text + "<br><br>";
+  await sleep(1000);
+}
+
+async function printSlow(text) {
+  for (let char of text) {
+    gameText.innerHTML += char;
+    await sleep(50);
+  }
+  gameText.innerHTML += "<br><br>";
+  await sleep(1000);
+}
+
+async function startGame() {
+  gameText.innerHTML = "";
+  choicesDiv.innerHTML = "";
+  textInput.style.display = "none";
+
+  await sleep(1500);
+  await printSlow("Wake up...");
+  await sleep(2000);
+
+  await printFast("The first thing you hear is your own heartbeat. Wild. Wrong. Like it’s pounding inside your throat instead of your chest.");
+  await printFast("A deep, mechanical growl vibrates through the floor under your body. The trailer rocks and shudders — steel bones groaning in protest. Each jolt rattles your teeth and jars your spine.");
+  await printFast("It’s cold. But you’re sweating.");
+  await printFast("You’re lying on a ribbed steel floor slick with something warm and sticky. Your jacket soaks it up. You don’t want to know what it is.");
+  await printFast("You open your mouth to call out — and choke immediately.");
+  await printFast("The air tastes like battery acid and rotted meat. Thick, humid. Each breath burns like you’re inhaling rust.");
+  await printFast("Thin slices of blood-red light cut across the trailer walls. They flicker, distort — as if the walls themselves are breathing.");
+  await printFast("The floor shifts under you. The whole trailer leans slightly to the left — for a second you think you’re sinking, like the truck is sliding sideways off the road… or off the world.");
+  await printFast("The tires howl against the highway outside — a long, screaming sound that rakes your nerves raw. Then — silence. Except for the breathing.");
+
+  await printSlow("Low. Shallow. Wet. Close.");
+  await printFast("You freeze. Muscles screaming to move — but too scared to obey.");
+
+  await printSlow("Then you hear it.");
+  await printSlow("The dragging.");
+  await printFast("A wet scrape across the steel floor. Closer. Closer.");
+  await printFast("You don’t know if it’s a hand, a foot, or something worse. You don’t want to know.");
+
+  await printFast("A sudden jolt slams you sideways into the wall. You slam your elbow against a bolt — pain flares bright and hot. It grounds you for a moment — but the world around you doesn’t stop spinning.");
+  await printFast("You blink, trying to steady yourself — and for just a second, you see shapes moving. No — shifting. On the walls. Like things caught between the metal and the skin of the trailer, writhing just beneath the surface.");
+  await printFast("You squeeze your eyes shut. It has to be a trick. It has to be.");
+
+  await printSlow("A whisper crawls past your ear...");
+  await printSlow("\"Don't move...\"");
+
+  await printFast("Your stomach knots. The breathing grows louder. Hot. Wet. Right behind you.");
+  await printFast("The trailer hits a bump. The world jumps. You land hard — your hand sinking into a soft mass that should not be there.");
+  await printFast("You rip it back instinctively — but the texture clings to your skin.");
+  await printFast("You wipe your hand on your jacket blindly — the smell blooming up in your face now: rotted sweet flesh, coppery blood, something chemical and dead.");
+
+  await printFast("Your mind tries to remember — flashbulb images:");
+  await printFast("• Blinding headlights.<br>• A hand pressed over your mouth.<br>• Darkness swallowing you whole.");
+
+  await printFast("No full memory. Only fear.");
+  await printFast("The heartbeat in your ears drowns out everything else.");
+
+  await printFast("You realize whatever is moving… whatever is breathing… whatever is whispering… it knows you’re awake now.");
+  await printFast("You have seconds before it reaches you.");
+
+  presentChoices();
+}
+
+function presentChoices() {
+  gameText.innerHTML += `
+    <strong>What will you do?</strong><br><br>
+    [A] Feel along the walls for a door handle<br>
+    [B] Stay completely silent and hidden<br>
+    [C] Bang loudly and scream for help<br>
+    [D] Search blindly for something sharp<br><br>
+    <em>Type A, B, C, or D and press Enter.</em>
+  `;
+  textInput.style.display = "block";
+  textInput.focus();
+}
+
+textInput.addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+    const choice = textInput.value.trim().toUpperCase();
+    if (["A", "B", "C", "D"].includes(choice)) {
+      handleChoice(choice);
+    } else {
+      alert("Please type A, B, C, or D.");
+    }
+  }
+});
+
+function handleChoice(choice) {
+  textInput.style.display = "none";
+  choicesDiv.innerHTML = "";
+  gameText.innerHTML = "";
+
+  switch (choice) {
+      case "A":
+        runWithTimer(`You freeze against the wall, clutching the broken latch like it’s still useful.  
+  Your heartbeat is thunder. The cold steel stings your palms, but you don't let go.
+
+  That sound…  
+  The *snap* still echoes in the dark — not from the walls,  
+  but from **inside** every breath around you.
+
+  Someone else is breathing fast now. Not the thing.  
+  One of *them*.
+
+  A soft cry breaks the silence. Another breath catches in a throat.  
+  You hear a body shifting — sliding back against the far corner.  
+  Then a hiss. Words. From someone close.
+
+  > “Who did that…?”
+
+  You don’t answer.  
+  You can’t.
+
+  The air feels tighter. Heavier. Like the trailer is holding its breath.
+
+  *CLANG.*
+
+  The far end of the trailer explodes in noise.  
+  A violent slam.  
+  The metal groans under the force, screeching like a dying animal.  
+  You drop to your knees as the entire structure rocks — not tipping, but ***buckling***.  
+  A scream bursts through the dark — raw and desperate.
+
+  Then —  
+  *CRUNCH.*
+
+  Wet. Sudden.  
+  Final.
+
+  The scream dies in a *snap*, and something slides down the wall like a sack of meat.
+
+  Silence slams down.  
+  But it’s not empty.
+
+  It’s waiting.
+
+  Someone whispers — harsh and cracked:
+
+  > “It’s your fault...”
+
+  Then another voice, louder now —  
+  strangled with terror and rage.
+
+  > “They touched the latch! I heard it! It was them!”
+
+  You try to crawl backward, but the trailer isn’t just echoing now.  
+  It’s listening.
+
+  You’ve become a sound. A scent.  
+  A ripple of heat in a cold, dead space.
+
+  Every shift you make,  
+  every breath you hold,  
+  is a map.
+
+  And now, both the survivors —  
+  and the thing moving in the dark —  
+  are following it.
+
+  You didn’t just make a mistake.
+
+  You made a sacrifice.
+
+  You just don’t know if it was yours.`);
+      break;
+    case "B":
+       printFast(`You don’t move.  
+      Not even a breath.
+
+      The trailer sways, groaning like something trying not to scream.  
+      You press your back into the cold ribbed wall, become part of it,  
+      as if metal will claim you and hide you from the thing inside here with you.
+
+      Your body begs to move.  
+      Your muscles tremble.  
+      But you crush every instinct, every reflex, and bury it under raw fear.
+
+      You are no longer a person.  
+      You are noise.  
+      You are scent.  
+      You are prey pretending to be **part of the dark**.
+
+      Then it happens —  
+      just beside you.
+
+      A presence glides past your foot.  
+      It brushes your boot with something that feels  
+      wet  
+      rubbery  
+      and wrong.
+
+      You bite your lip so hard you taste copper.  
+      It’s the only proof you’re still real.
+
+      A sound breaks behind you —  
+      the shallow *hic* of a stifled sob.  
+      Someone else.
+
+      You want to scream — not to warn them —  
+      but to **shut them up.**  
+      To stop what’s coming.
+
+      You don’t.
+
+      They shift.  
+      A boot scuffs the metal floor.  
+      A zipper is tugged — fast, nervous.  
+      A whisper:
+
+      > “Please…”
+
+      Too late.
+
+      You hear it  
+      turn.  
+      Sniff.
+
+      Then it **moves.**
+
+      Fast.
+
+      A crash of limbs, metal, and skin —  
+      not yours —  
+      theirs.
+
+      A scream starts.  
+      It gurgles.  
+      Then ends in a sound that makes you clamp your hand over your mouth and retch in silence.
+
+      A dragging.  
+      The slow, wet pull of something heavy  
+      being taken  
+      somewhere else.
+
+      Then silence.
+
+      You are still alive.
+
+      But you know the cost.
+
+      That sound — the scuff, the sob, the zipper —  
+      **that was supposed to be yours.**
+
+      But it wasn’t.
+
+      > And now the only thing louder than the silence  
+      > is the part of you that knows  
+      > you didn’t save them.
+
+      You just didn’t move.`);
+      break;
+    case "C":
+      runWithTimer(`You slam your fists against the trailer wall.
+
+      The metal erupts under your hands, the sound screaming louder than your voice.  
+      You yell until your throat splits.
+
+      > “HEY! HEY! HELP! WE’RE IN HERE!”
+
+      Your voice fractures.  
+      Blood creeps up the back of your tongue.  
+      But you scream again.
+
+      A flicker of light cuts through one of the vents — a passing headlight, maybe.  
+      Your heart leaps.
+
+      Then it’s gone.
+
+      And so is the silence.
+
+      ---
+
+      Something in the trailer **changes.**  
+      Not a movement — a **mood.**
+
+      The air grows frantic.  
+      Thick.  
+      Breathless.
+
+      You hear rustling.  
+      A body scrambling across the floor.  
+      A hissed voice:
+
+      > “What did you do…?”
+
+      Another whisper — far off:
+
+      > “They heard us…”
+
+      Then chaos.
+
+      Someone throws themselves at the wall behind you, pounding, shrieking.  
+      Another voice cries out — not in fear — in rage.
+
+      > “YOU’VE KILLED US!”
+
+      The trailer erupts.
+
+      Screams — dozens — all tangled and shrill.  
+      Fists slam steel.  
+      Boots stomp blindly.
+
+      You can’t tell if it’s panic or a riot.
+
+      A hand claws your jacket. Another grabs your ankle.  
+      You’re dragged to the side as people trample each other in blind desperation.
+
+      Then it answers.
+
+      Not the driver.  
+      Not a savior.
+
+      The thing.
+
+      It doesn’t roar.  
+      It doesn’t growl.
+
+      It **tears.**
+
+      Flesh from steel.  
+      Bone from screams.
+
+      A wet *impact* — close.  
+      A body slams into your back.  
+      You feel the warmth soak through your shirt.  
+      It’s not yours.
+
+      Yet.
+
+      Someone screams your name — you don’t recognize the voice.  
+      You don’t even remember telling them who you are.
+
+      You open your mouth to say something. Anything.
+
+      But now,  
+      your voice doesn’t belong to you anymore.
+
+      > It belongs to the sound you brought into the trailer.  
+      > It belongs to the thing that doesn’t stop moving.  
+      > That doesn’t stop *eating.*
+
+      You didn’t call for help.
+
+      You called for **feast.**`);
+      break;
+    case "D":
+       printFast(`You crawl forward, palms skimming the freezing steel —  
+      but it’s not clean.
+
+      It’s **coated**.  
+      Thick. Wet. Sticky.
+
+      Your fingertips slide through it like oil mixed with ground meat.  
+      The smell hits next.  
+      Sweet.  
+      Rotten.  
+      Coppery.
+
+      You try not to gag.
+
+      You don’t call out.  
+      You just reach.
+
+      One hand in front of the other.
+
+      You slice your finger on glass.  
+      Crack your knee on a bolt.  
+      You barely feel it anymore — the pain is background now. White noise.
+
+      Then—  
+      your hand closes around something solid.
+
+      Cold.  
+      Rough.  
+      A broken metal pipe — jagged on one end, flat on the other.
+
+      It’s heavier than it should be.  
+      You don’t think about that.  
+      You just grip it tighter.
+
+      Then—
+
+      A hand grabs your wrist.
+
+      Tight.  
+      Shaking.  
+      Human.
+
+      You jerk back instinctively — but they don’t let go.
+
+      A voice — barely a whisper — gasps in your ear.
+
+      > “Don’t leave me… please…”
+
+      It’s not a threat.  
+      It’s a plea.
+
+      They’re not dragging you.  
+      They’re holding on.
+
+      Needing you.
+
+      > But you don’t know them.  
+      > You can’t see their face.  
+      > You don’t even know if they’re bleeding… or bait.
+
+      You panic.
+
+      You pull harder — but they don’t let go.  
+      Their grip tightens.
+
+      > “Wait—”
+
+      Your body reacts before your mind can stop it.
+
+      You swing.
+
+      Hard.
+
+      The metal pipe slams into something soft.  
+      You feel it *give*.  
+      Not break.  
+      **Collapse.**
+
+      There’s a sound —  
+      wet, thick, like biting into overripe fruit.
+
+      Then stillness.
+
+      No breath.
+
+      Just a twitch.
+
+      Then… nothing.
+
+      The silence after is *not empty*.  
+      It’s full.
+
+      Full of something watching.
+
+      Waiting.
+
+      You shuffle backward, breath shaking, hands trembling.  
+      The pipe is still in your grip.
+
+      It’s warm now.
+
+      Thicker.
+
+      You wipe it without looking.
+
+      You can’t.
+
+      You don’t want to know.
+
+      But the blood knows you.
+
+      And so does the thing in the trailer.
+
+      Because the moment you made the kill —  
+      **it stopped.**
+
+      Not moving.
+
+      Just listening.
+
+      To you.
+
+      > You didn’t find a weapon.  
+      > You found your first kill.  
+      > And you still don’t know what — or who — it was.`);
+      break;
+  }
+}
+
+function runWithTimer(textBlock) {
+  let timer = 10;
+  const timerDisplay = document.createElement('div');
+  timerDisplay.innerHTML = `<strong>Time Remaining: ${timer}</strong>`;
+  gameText.appendChild(timerDisplay);
+
+  const countdown = setInterval(() => {
+    timer--;
+    timerDisplay.innerHTML = `<strong>Time Remaining: ${timer}</strong>`;
+    if (timer === 0) {
+      clearInterval(countdown);
+      gameText.innerHTML += `<br><br><em>You hesitated too long... Something grabs you.</em>`;
+    }
+  }, 1000);
+
+  printFast(textBlock);
+}
+
+startGame();
+</script>
+
+</body>
+</html>
